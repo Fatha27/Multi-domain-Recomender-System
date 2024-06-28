@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "6005:6005"
+
+  python_backend:
+    build:
+      context: ./finalmajor
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+

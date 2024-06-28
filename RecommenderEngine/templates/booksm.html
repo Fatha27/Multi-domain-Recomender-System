@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Recommendations</title>
+</head>
+<body>
+    <h1>Book Recommendations</h1>
+    <form method="post">
+        <label for="book_name">Enter a book title:</label>
+        <input type="text" id="book_name" name="book_name" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+    {% if recommendations %}
+        <h2>Recommendations for "{{ bookTitle }}":</h2>
+        <ul>
+        {% for book in recommendations %}
+            <li>{{ book }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

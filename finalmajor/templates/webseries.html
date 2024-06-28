@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Series Recommendations</title>
+</head>
+<body>
+    <h1>Web Series Recommendations</h1>
+    <form method="post">
+        <label for="series_name">Enter a series name:</label>
+        <input type="text" id="series_name" name="series_name" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+    {% if recommendations %}
+        <h2>Recommendations for {{ series_name }} :</h2>
+        <ul>
+            {% for series in recommendations %}
+                <li>{{ series }}</li>
+            {% endfor %}
+            </ul>
+    {% endif %}
+    
+</body>
+</html>
+
+

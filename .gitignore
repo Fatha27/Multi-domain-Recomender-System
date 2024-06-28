@@ -1,0 +1,4 @@
+server/.env
+server/node_modules
+frontend/node_modules
+finalmajor/flask_session

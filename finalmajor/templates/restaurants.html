@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Recommendations</title>
+</head>
+<body>
+    <h1>Restaurant Recommendations</h1>
+    <form method="post">
+        <label for="city">Enter the city name:</label>
+        <input type="text" id="city_name" name="city_name" required>
+        <br>
+        <label for="restaurant_name">Enter the restaurant name:</label>
+        <input type="text" id="restaurant_name" name="restaurant_name" required>
+        <br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+    
+    {% if recommendations %}
+        <h2>Recommendations for {{ restaurant_name }} in {{ city_name }}:</h2>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+            </ul>
+    {% endif %}
+
+</body>
+</html>

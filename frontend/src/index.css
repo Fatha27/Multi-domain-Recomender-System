@@ -1,0 +1,342 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200&family=Indie+Flower&family=Montserrat+Alternates:wght@800&family=Montserrat:wght@800&family=Pacifico&family=Poppins:wght@300&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100&family=Source+Code+Pro:wght@200&family=Urbanist:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: raleway;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #16161D;
+  opacity: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.scroller::-webkit-scrollbar {
+  width: 0.6em;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background-color:#D9D9D9;
+  margin: 20px 0px;
+  border-radius: 81px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background-color: #3109BA;
+  /* outline: 1px solid rgba(28, 41, 81, 0.5); */
+  /* opacity; */
+  border-radius: 26px;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  background-color:#16161D;
+  /* margin: 20px 0px; */
+  border-radius: 81px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #F8F8FF;
+  /* outline: 1px solid rgba(28, 41, 81, 0.5); */
+  /* opacity; */
+  border-radius: 26px;
+}
+
+/* Shimmer */
+/* 
+@layer components {
+  .animate-pulse {
+    @apply overflow-hidden relative;
+    background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+    background-size: 800px 104px;
+    animation: pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+} */
+
+@layer components {
+  .animate-pulse {
+    @apply overflow-hidden relative;
+    background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+    background-size: 1000px 104px;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      background-position: -500px 0;
+    }
+    100% {
+      background-position: 500px 0;
+    }
+  }
+}
+
+
+/* 1st Card */
+
+.cardContainer {
+  width: fit-content;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  width: 220px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(30px);
+  background-color: rgba(65, 65, 65, 0.308);
+  border: 1px solid rgba(255, 255, 255, 0.089);
+  cursor: pointer;
+}
+
+.city {
+  /* font-weight: 700;
+  font-size: 0.9em; */
+  letter-spacing: 1.2px;
+  color: white;
+}
+
+
+.cardContainer::before {
+  width: 100px;
+  height: 100px;
+  content: "";
+  position: absolute;
+  background-color: rgb(144, 161, 255);
+  z-index: -1;
+  border-radius: 50%;
+  left: 100px;
+  top: 50px;
+  transition: all 1s;
+}
+
+.cardContainer:hover::before {
+  transform: translate(-50px, 50px);
+}
+
+/* 2nd card */
+
+.card2 {
+  --background: linear-gradient(to left, #595FF0 0%, #ea5358 100%);
+  /* width: 190px; */
+  /* height: 254px; */
+  padding: 5px;
+  border-radius: 1rem;
+  overflow: visible;
+  background: #f7ba2b;
+  /* background:#595FF0; */
+  background: var(--background);
+  position: relative;
+  z-index: 1;
+}
+
+.card2::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  filter: blur(25px);
+  background: #f7ba2b;
+  background: var(--background);
+  transition: opacity .5s;
+}
+
+.card2-info {
+  --color: #181818;
+  background: var(--color);
+  color: var(--color);
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-radius: .7rem;
+}
+
+.card2 .title {
+  /* font-weight: bold; */
+  letter-spacing: .1em;
+  /* Update title font color to white */
+  color: white;
+  /* Ensure the text is always visible */
+  position: relative;
+  z-index: 1;
+}
+
+/* Button */
+.cssbuttons-io-button {
+  background: #595FF0;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+
+/* Recommenders card */
+/* styles.css */
+
+
+/* .border-gradient-to-l::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 5px solid transparent; /* Adjust border size as needed */
+  /* border-image-slice: 1; */
+  /* border-image-source: linear-gradient(to left, #595FF0, #ea5358); */
+  /* pointer-events: none; */
+  /* border-radius: 40px; */
+/* } */ 
+
+/* styles.css */
+
+
+/* Additional styles to adjust the size of the pseudo-element */
+
+/* .reccard .card2-info {
+  width: 332px;
+  height: 176px;
+} */
+
+.reccard2 {
+  --background: linear-gradient(to left, #595FF0 0%, #ea5358 100%);
+  width: 332px;
+  height: 176px;
+  padding: 5px;
+  border-radius: 1rem;
+  overflow: visible;
+  background: #f7ba2b;
+  /* background:#595FF0; */
+  background: var(--background);
+  position: relative;
+  z-index: 1;
+}
+
+.reccard2::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  filter: blur(25px);
+  background: #f7ba2b;
+  background: var(--background);
+  transition: opacity .5s;
+}
+
+.reccard2-info {
+  --color: #181818;
+  background: var(--color);
+  color: var(--color);
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-radius: .7rem;
+}
+
+.reccard2 .rectitle {
+  /* font-weight: bold; */
+  letter-spacing: .1em;
+  /* Update title font color to white */
+  color: white;
+  /* Ensure the text is always visible */
+  position: relative;
+  z-index: 1;
+}
+
+
+

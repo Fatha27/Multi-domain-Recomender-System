@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Course Recommendations</title>
+</head>
+<body>
+    <h1>Udemy  Recommendations</h1>
+    <form method="post">
+        <label for="series_name">Enter a course name:</label>
+        <input type="text" id="title_utf" name="title_utf" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+    {% if recommendations %}
+        <h2>Recommendations for {{ title_utf }} :</h2>
+        <ul>
+            {% for course in recommendations %}
+                <li>{{ course }}</li>
+            {% endfor %}
+            </ul>
+    {% endif %}
+    
+</body>
+</html>
+
+

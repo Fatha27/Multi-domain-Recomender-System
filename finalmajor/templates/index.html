@@ -1,0 +1,213 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Recommender System</title>
+</head>
+<body>
+    <h1>Welcome to the Recommender System</h1>
+    <a href="/booksm">Book Recommendations</a><br>
+    <a href="/moviesm">Movie Recommendations</a>
+    <a href="/webseries">Web Series Recommendations</a><br>
+    <a href="/restaurants">Restaurant Recommendations</a><br>
+    <a href="/coursera">Coursera Recommendations</a><br>
+    <a href="/udemy">Udemy Recommendations</a><br>
+
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chatbox {
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        #messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            flex-grow: 1;
+        }
+        .message {
+            display: flex;
+            align-items: flex-start;
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .message.user {
+            background-color: #e1f5fe;
+            flex-direction: row-reverse;
+        }
+        .message.bot {
+            background-color: #e8f5e9;
+        }
+        .message img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+        .message-content {
+            max-width: 80%;
+        }
+        #chat-form {
+            display: flex;
+            width: 100%;
+        }
+        #user_input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        #chat-form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            outline: none;
+        }
+        #chat-form button:hover {
+            background-color: #45a049;
+        }
+        .loading-dots {
+            display: flex;
+            align-items: center;
+        }
+        .loading-dots img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .dots {
+            display: flex;
+            align-items: center;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            background-color: #3498db;
+            border-radius: 50%;
+            animation: blink 1.4s infinite both;
+        }
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes blink {
+            0%, 80%, 100% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <form id="chat-form">
+            <input type="text" id="user_input" placeholder="Type a message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const userInput = document.getElementById('user_input').value;
+            appendMessage('user', userInput);
+            document.getElementById('user_input').value = '';
+
+            // Show loading dots
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('message', 'bot');
+
+            const icon = document.createElement('img');
+            icon.src = 'https://img.icons8.com/?size=100&id=EI4WWg4sHDVP&format=png&color=000000';
+
+            const dotsDiv = document.createElement('div');
+            dotsDiv.classList.add('dots');
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                dotsDiv.appendChild(dot);
+            }
+
+            loadingDiv.appendChild(icon);
+            loadingDiv.appendChild(dotsDiv);
+            document.getElementById('messages').appendChild(loadingDiv);
+            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'user_input': userInput
+                })
+            });
+            const data = await response.json();
+
+            // Remove loading dots
+            document.getElementById('messages').removeChild(loadingDiv);
+
+            appendMessage('bot', data.response);
+        });
+
+        function appendMessage(sender, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+
+            const icon = document.createElement('img');
+            icon.src = sender === 'user' ? 'https://img.icons8.com/ios-filled/50/000000/user.png' : 'https://img.icons8.com/?size=100&id=EI4WWg4sHDVP&format=png&color=000000';
+            const messageContent = document.createElement('div');
+            messageContent.classList.add('message-content');
+            messageContent.innerHTML = text;
+
+            messageDiv.appendChild(icon);
+            messageDiv.appendChild(messageContent);
+
+            document.getElementById('messages').appendChild(messageDiv);
+            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+        }
+    </script>
+</body>
+</html>
